@@ -1,5 +1,23 @@
+# Use an Ubuntu-based image
 FROM ubuntu:latest
-WORKDIR /wisecow
+
+# Set working directory
+WORKDIR /app
+
+# Update package lists and install necessary packages
+RUN apt-get update && \
+    apt-get install -y fortune-mod cowsay 
+
+# Copy the Bash script into the container
 COPY . .
-RUN sudo apt install fortune-mod cowsay -y
-CMD [“./wisecow”] 
+
+# Make the script executable
+RUN chmod +x /app/wisecow.sh
+
+# Expose the specified port
+EXPOSE 4499
+
+# Run the script with netcat listening on all interfaces
+CMD ["/bin/bash", "-c", "/app/wisecow.sh"]
+
+
