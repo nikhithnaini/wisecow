@@ -17,7 +17,6 @@ RUN chmod +x /app/wisecow.sh
 # Expose the specified port
 EXPOSE 4499
 
-# Run the script with netcat listening on all interfaces
-CMD ["/bin/bash", "-c", "/app/wisecow.sh"]
+CMD ["./wisecow.sh"]
 
 
