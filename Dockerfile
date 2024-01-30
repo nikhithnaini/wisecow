@@ -4,12 +4,12 @@ FROM ubuntu:latest
 # Set working directory
 WORKDIR /app
 
-# Update package lists and install necessary packages
+# Install necessary packages
 RUN apt-get update && \
-    apt-get install -y fortune-mod cowsay 
+    apt-get install -y fortune-mod cowsay netcat-openbsd
 
 # Copy the Bash script into the container
-COPY . .
+COPY wisecow.sh /app/wisecow.sh
 
 # Make the script executable
 RUN chmod +x /app/wisecow.sh
@@ -17,6 +17,5 @@ RUN chmod +x /app/wisecow.sh
 # Expose the specified port
 EXPOSE 4499
 
-CMD ["./wisecow.sh"]
-
-
+# Run the script
+CMD ["/app/wisecow.sh"]
